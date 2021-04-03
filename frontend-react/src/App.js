@@ -54,6 +54,7 @@ function App() {
   )
 
   const [mostrarAddAlbum, setMostrarAddAlbum] = useState(false)
+  // const [mostrarAlbum, setMostrarAlbum] = useState(false)
 
   const addAlbum = (album) => {
     setAlbuns([...albuns, album])
@@ -77,10 +78,14 @@ function App() {
             onAdd={addAlbum}
           />) : ''} 
 
-      <Albuns 
-        albuns={albuns}
-        onDelete={deleteAlbum}
-      />
+      {albuns.length > 0 ? (
+        <Albuns 
+          albuns={albuns} 
+          onDelete={deleteAlbum}
+          // onRead={() => setMostrarAlbum(!mostrarAlbum)}
+        />
+      ) : ('Não há álbuns por aqui.')}
+
       <Footer/>
     </div>
   );

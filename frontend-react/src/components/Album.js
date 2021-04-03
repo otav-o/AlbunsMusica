@@ -1,6 +1,10 @@
 import Button from './Button'
+import { useState } from 'react'
+import ReadAlbum from './ReadAlbum'
 
 const Album = ({album, onDelete}) => {
+
+    const [mostrarAlbum, setMostrarAlbum] = useState(false)
 
     return (
         <div className='album'>
@@ -11,7 +15,7 @@ const Album = ({album, onDelete}) => {
                 <Button
                     cor='blue'
                     texto='Ver'
-                    // onClick={}
+                    onClick={() => setMostrarAlbum(!mostrarAlbum)}
                 />
                 <Button
                     cor='orange'
@@ -23,6 +27,10 @@ const Album = ({album, onDelete}) => {
                     texto='Apagar'
                     onClick={() => onDelete(album.albumId)}
                 />
+                {
+                    mostrarAlbum ?  
+                        <ReadAlbum album={album}/> : ''
+                }
         </div>
     )
 }
