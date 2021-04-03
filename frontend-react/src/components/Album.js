@@ -1,6 +1,6 @@
 import Button from './Button'
 
-const Album = ({album}) => {
+const Album = ({album, onDelete}) => {
 
     return (
         <div className='album'>
@@ -21,7 +21,7 @@ const Album = ({album}) => {
                 <Button
                     cor='red'
                     texto='Apagar'
-                    // onClick={}
+                    onClick={() => onDelete(album.albumId)}
                 />
         </div>
     )

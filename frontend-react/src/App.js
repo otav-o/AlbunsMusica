@@ -1,12 +1,14 @@
+import { useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Albuns from './components/Albuns'
-
+import AddAlbum from './components/AddAlbum'
 
 
 function App() {
 
-    const albuns = [
+  const[albuns, setAlbuns] = useState(
+    [
       {
         albumId: "2",
         nome: "22",
@@ -49,12 +51,27 @@ function App() {
         musicas: []
       }
     ]
+  )
+
+  const addAlbum = (album) => {
+    setAlbuns([...albuns, album])
+    console.log(album)
+  }
+
+  const deleteAlbum = (id) => {
+    // console.log('deletar:', id)
+    setAlbuns(albuns.filter((album) => album.albumId !== id)) // não mostrar na UI 
+  }
 
   return (
     <div className="App">
       <Header/>
+      <AddAlbum
+        onAdd={addAlbum}
+      />
       <Albuns 
-        albuns={albuns} 
+        albuns={albuns}
+        onDelete={deleteAlbum}
       />
       <Footer/>
     </div>
