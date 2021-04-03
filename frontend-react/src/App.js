@@ -11,18 +11,24 @@ function App() {
 
   const [mostrarAddAlbum, setMostrarAddAlbum] = useState(false)
 
-  const baseUrl = 'http://localhost:5000/albuns'
+  const baseUrl = 'http://localhost:3000/albuns'
 
   useEffect(() => {
-    const obterAlbuns = async () => {
-      const res = await fetch(baseUrl)
-      const data = await res.json()
-
-      console.log(data)
+    const getAlbuns = async() => { // async pois obterAlbuns retorna uma promise
+      const albunsDoServidor = await obterAlbuns()
+      setAlbuns(albunsDoServidor)
     }
 
-    obterAlbuns()
+    getAlbuns()
   }, [])
+
+  // Obter do servidor
+  const obterAlbuns = async () => {
+    const res = await fetch(baseUrl)
+    const data = await res.json()
+
+    return data
+  }
 
 
   const addAlbum = (album) => {
@@ -30,8 +36,13 @@ function App() {
     console.log(album)
   }
 
-  const deleteAlbum = (id) => {
-    // console.log('deletar:', id)
+  const deleteAlbum = async (id) => {
+
+    console.log(id)
+    await fetch(`${baseUrl}/${id}`, {method: 'DELETE'})
+    // Estava retornando vazio, pois o json server espera "id", e não "albumId"
+    // Solução: npx json-server db.json --id albumId 
+
     setAlbuns(albuns.filter((album) => album.albumId !== id)) // não mostrar na UI 
   }
 
