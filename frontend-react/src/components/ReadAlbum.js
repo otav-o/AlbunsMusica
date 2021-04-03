@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import Button from './Button'
 import Musica from './Musica'
 
 const ReadAlbum = ({album}) => {
 
-    const [musicas, setMusicas] = useState([...album.musicas]) 
+    const [musicas, setMusicas] = useState([...album.musicas])
 
     const deleteMusica = (id) => {
         setMusicas(musicas.filter((musica) => musica.musicaId !== id)) // remover a música somente da UI
@@ -16,27 +15,15 @@ const ReadAlbum = ({album}) => {
 
                 {console.log(musicas)}
 
-                {(album.musicas.length === 0) ? 
+                {(musicas.length === 0) ?
                     (<>Sem músicas ainda.</>)
                 :
                 // album.musicas.map((musica) => ())
                 musicas.map((musica) => (
                     <>
-                        <Musica key={musica.musicaId} musica={musica} deleteMusica={deleteMusica}/>
+                        <Musica key={musica.musicaId} musica={musica}/>
                     </>
                 ))}
-                <hr></hr>
-                <br></br>
-                <Button
-                    cor='lime'
-                    texto='Nova música'
-                    // onClick={}
-                />
-                <Button
-                    cor='purple'
-                    texto='Salvar alterações'
-                    // onClick={}
-                />
             </div>        
         </div>
     )

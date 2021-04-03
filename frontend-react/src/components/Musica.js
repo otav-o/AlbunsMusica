@@ -1,18 +1,15 @@
 import Button from './Button'
 
-const Musica = ({musica, deleteMusica}) => {
+const Musica = ({musica}) => {
     return (
-        <div>
+        <div className='musica'>
             {console.log(musica)}
-            <p>Nome: {musica.nome}</p>
-            <p>Duração: {musica.duracao} segundos</p>
-            <Button
-                cor='red'
-                texto='Apagar música'
-                onClick={() => deleteMusica(musica.musicaId)}
-            />
+            <p><span>Nome</span>: {musica.nome}</p>
+            <p><span>Duração</span>: {musica.duracao} segundos</p>
         </div>
     )
 }
 
 export default Musica
+
+ 
