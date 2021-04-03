@@ -36,10 +36,22 @@
       "musicas": []
     },
     {
-      "albumId": "string",
-      "nome": "stringe",
-      "anoLancamento": 0,
-      "musicas": []
+      "nome": "Álbum 01",
+      "anoLancamento": "2000",
+      "musicas": [],
+      "albumId": "zKvoHoy"
+    },
+    {
+      "nome": "Álbum 02",
+      "anoLancamento": "2000",
+      "musicas": [],
+      "albumId": "4WiM_30"
+    },
+    {
+      "nome": "Álbum 03",
+      "anoLancamento": "2001",
+      "musicas": [],
+      "albumId": "pocM_Hj"
     }
   ]
 }
