@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Albuns from './components/Albuns'
@@ -12,9 +13,12 @@ function App() {
   const [mostrarAddAlbum, setMostrarAddAlbum] = useState(false)
 
   const baseUrl = 'http://localhost:3000/albuns'
+  // const baseUrl = 'https://localhost:44305/api/albums' // asp.net
+
   
   useEffect(() => {
     const getAlbuns = async() => { // async pois obterAlbuns retorna uma promise
+      console.log(albuns)
       const albunsDoServidor = await obterAlbuns()
       setAlbuns(albunsDoServidor)
     }
@@ -41,7 +45,7 @@ function App() {
     })
 
     const data = await res.json() // lembrar do await
-    setAlbuns([...albuns, album])
+    setAlbuns([...albuns, data])
     console.log(album)
   }
 
@@ -56,14 +60,35 @@ function App() {
     setAlbuns(albuns.filter((album) => album.albumId !== id)) // não mostrar na UI 
   }
 
+  // PUT
+  const atualizarAlbum = async (albumAtualizado) => {
+    const res = await fetch(`${baseUrl}/${albumAtualizado.albumId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(albumAtualizado)
+    })
+
+    // const data = await res.json()
+
+    // setAlbuns(albuns.map((album) => 
+    //   album.id === albumAtualizado.id ? {...album, musicas: data.musica} : album // cuidado
+    // ))
+  }
+
   return (
+    <Router>
     <div className="App">
       <Header 
           onAdd={() => setMostrarAddAlbum(!mostrarAddAlbum)}
           mostrarAddAlbum={mostrarAddAlbum}
         />
 
-      {mostrarAddAlbum ? 
+    </div>
+    <Route path='/' exact render={(props) => (
+      <>
+        {mostrarAddAlbum ? 
           (<AddAlbum
             onAdd={addAlbum}
           />) : ''} 
@@ -72,11 +97,15 @@ function App() {
         <Albuns 
           albuns={albuns} 
           onDelete={deleteAlbum}
+          onUpdate={atualizarAlbum}
         />
       ) : ('Não há álbuns por aqui.')}
+      </>
+    )} />
 
-      <Footer/>
-    </div>
+    {/* <Route name='editar' path='/album/editar/:id' component={UpdateAlbum}/> */}
+    <Footer/>
+    </Router>
   );
 }
 

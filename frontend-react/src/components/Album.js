@@ -1,10 +1,13 @@
 import Button from './Button'
 import { useState } from 'react'
 import ReadAlbum from './ReadAlbum'
+import { Link } from 'react-router-dom'
+import UpdateAlbum from './UpdateAlbum2'
 
-const Album = ({album, onDelete}) => {
+const Album = ({album, onDelete, onUpdate}) => {
 
     const [mostrarAlbum, setMostrarAlbum] = useState(false)
+    const [mostrarAlterarAlbum, setmostrarAlterarAlbum] = useState(false)
 
     return (
         <div className='album'>
@@ -17,11 +20,14 @@ const Album = ({album, onDelete}) => {
                     texto='Ver'
                     onClick={() => setMostrarAlbum(!mostrarAlbum)}
                 />
+                {/* <Link to={`/album/editar/${album.albumId}`}> */}
                 <Button
                     cor='orange'
                     texto='Alterar'
-                    // onClick={}
+                    onClick={() => setmostrarAlterarAlbum(!mostrarAlterarAlbum)}
                 />
+                
+
                 <Button
                     cor='red'
                     texto='Apagar'
@@ -29,8 +35,16 @@ const Album = ({album, onDelete}) => {
                 />
                 {
                     mostrarAlbum ?  
-                        <ReadAlbum album={album}/> : ''
+                        <ReadAlbum 
+                            album={album}
+                        /> : ''
                 }
+
+                { mostrarAlterarAlbum ? 
+                    <UpdateAlbum
+                        album={album}
+                        onUpdate={onUpdate}
+                    /> : ''}
         </div>
     )
 }

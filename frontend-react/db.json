@@ -25,8 +25,8 @@
     },
     {
       "albumId": "4",
-      "nome": "oi",
-      "anoLancamento": 0,
+      "nome": "oláe",
+      "anoLancamento": "2011",
       "musicas": []
     },
     {
@@ -36,10 +36,10 @@
       "musicas": []
     },
     {
-      "nome": "Álbum 01",
+      "albumId": "zKvoHoy",
+      "nome": "Álbum 001",
       "anoLancamento": "2000",
-      "musicas": [],
-      "albumId": "zKvoHoy"
+      "musicas": []
     },
     {
       "nome": "Álbum 02",
