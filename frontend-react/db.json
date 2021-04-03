@@ -1,0 +1,45 @@
+{
+   "albuns": [
+    {
+      "albumId": "2",
+      "nome": "22",
+      "anoLancamento": 0,
+      "musicas": []
+    },
+    {
+      "albumId": "3",
+      "nome": "25453",
+      "anoLancamento": 0,
+      "musicas": [
+        {
+          "musicaId": "2",
+          "nome": "musica boa",
+          "duracao": 150
+        },
+        {
+          "musicaId": "3",
+          "nome": "musica ruim",
+          "duracao": 152
+        }
+      ]
+    },
+    {
+      "albumId": "4",
+      "nome": "oi",
+      "anoLancamento": 0,
+      "musicas": []
+    },
+    {
+      "albumId": "guid232",
+      "nome": "esse ano",
+      "anoLancamento": 2021,
+      "musicas": []
+    },
+    {
+      "albumId": "string",
+      "nome": "stringe",
+      "anoLancamento": 0,
+      "musicas": []
+    }
+  ]
+}
