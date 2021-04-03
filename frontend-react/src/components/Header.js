@@ -1,10 +1,16 @@
 import PropTypes from 'prop-types'
+import Button from './Button'
 
-const Header = ({titulo}) => { // ou props
+const Header = ({titulo, onAdd, mostrarAddAlbum}) => { // ou props
 
     return (
         <header className='header'>
             <h1>{titulo}</h1>
+            <Button
+                cor={mostrarAddAlbum?'red':'green'} 
+                texto= {mostrarAddAlbum?'Fechar':'Adicionar'} 
+                onClick={onAdd}
+            />
         </header>
     )
 }
@@ -16,11 +22,6 @@ Header.defaultProps = {
 Header.propTypes = {
     titulo: PropTypes.string.isRequired,
 }
-
-// const headingStyle = {
-//     color: 'red', 
-//     backgroundColor: 'black'
-// }
 
 export default Header
 

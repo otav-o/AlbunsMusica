@@ -3,7 +3,9 @@ import {useState} from 'react';
 const AddAlbum = ({onAdd}) => {
 
     const[nome, setNome] = useState('')
-    const[anoLancamento, setAnoLancamento] = useState('')    
+    const[anoLancamento, setAnoLancamento] = useState('')
+    const[musicas, setMusicas] = useState([])
+
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -13,9 +15,10 @@ const AddAlbum = ({onAdd}) => {
             return
         }
 
-        onAdd({nome, anoLancamento}) // executa a função lá do App
+        onAdd({nome, anoLancamento, musicas}) // executa a função lá do App
         setNome('')
         setAnoLancamento('')
+        setMusicas([])
     }
 
     return (

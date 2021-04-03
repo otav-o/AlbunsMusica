@@ -53,6 +53,8 @@ function App() {
     ]
   )
 
+  const [mostrarAddAlbum, setMostrarAddAlbum] = useState(false)
+
   const addAlbum = (album) => {
     setAlbuns([...albuns, album])
     console.log(album)
@@ -65,10 +67,16 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
-      <AddAlbum
-        onAdd={addAlbum}
-      />
+      <Header 
+          onAdd={() => setMostrarAddAlbum(!mostrarAddAlbum)}
+          mostrarAddAlbum={mostrarAddAlbum}
+        />
+
+      {mostrarAddAlbum ? 
+          (<AddAlbum
+            onAdd={addAlbum}
+          />) : ''} 
+
       <Albuns 
         albuns={albuns}
         onDelete={deleteAlbum}
