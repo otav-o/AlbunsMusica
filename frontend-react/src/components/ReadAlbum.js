@@ -5,9 +5,6 @@ const ReadAlbum = ({album}) => {
 
     const [musicas, setMusicas] = useState([...album.musicas])
 
-    const deleteMusica = (id) => {
-        setMusicas(musicas.filter((musica) => musica.musicaId !== id)) // remover a música somente da UI
-    }
 
     return (
         <div>
