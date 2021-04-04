@@ -2,7 +2,7 @@
 
 namespace AlbunsInfrastructure.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class MestreDetalhe : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,7 +10,7 @@ namespace AlbunsInfrastructure.Migrations
                 name: "Album",
                 columns: table => new
                 {
-                    AlbumId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AlbumId = table.Column<string>(type: "nvarchar(450)", nullable: false, defaultValueSql: "NEWID()"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AnoLancamento = table.Column<int>(type: "int", nullable: false)
                 },
@@ -23,7 +23,7 @@ namespace AlbunsInfrastructure.Migrations
                 name: "Musica",
                 columns: table => new
                 {
-                    MusicaId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MusicaId = table.Column<string>(type: "nvarchar(450)", nullable: false, defaultValueSql: "NEWID()"),
                     AlbumId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Duracao = table.Column<int>(type: "int", nullable: false)
@@ -36,7 +36,7 @@ namespace AlbunsInfrastructure.Migrations
                         column: x => x.AlbumId,
                         principalTable: "Album",
                         principalColumn: "AlbumId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

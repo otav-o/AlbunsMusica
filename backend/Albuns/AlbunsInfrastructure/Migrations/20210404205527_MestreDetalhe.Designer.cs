@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlbunsInfrastructure.Migrations
 {
     [DbContext(typeof(AlbunsApplicationContext))]
-    [Migration("20210401201212_MestreDetalhe")]
+    [Migration("20210404205527_MestreDetalhe")]
     partial class MestreDetalhe
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
