@@ -34,6 +34,16 @@ function App() {
     return data
   }
 
+  console.log(albuns)
+
+  // // GET : Id
+  // const obterAlbum = async (id) => {
+  //   const res = await fetch(`${baseUrl}/${id}`)
+  //   const data = await res.json()
+
+  //   return data
+  // }
+
   // POST
   const addAlbum = async (album) => {
     const res = await fetch(baseUrl, {
@@ -70,8 +80,21 @@ function App() {
       body: JSON.stringify(albumAtualizado)
     })
 
-    // const data = await res.json()
 
+    const novoNome = albumAtualizado.nome
+    const novoAno = albumAtualizado.anoLancamento
+    const novasMusicas = albumAtualizado.musicas
+
+    setAlbuns(albuns.map((album) => 
+      album.albumId === albumAtualizado.albumId ? {nome: novoNome, anoLancamento: novoAno, musicas: novasMusicas} : album
+      // perfeito
+  ))
+
+    // const data = await res.json()
+    
+    //   setAlbuns(albuns.map((album) => 
+    //     album.id === albumAtualizado.id ? {...albuns, album} : album // cuidado
+    // ))
     // setAlbuns(albuns.map((album) => 
     //   album.id === albumAtualizado.id ? {...album, musicas: data.musica} : album // cuidado
     // ))

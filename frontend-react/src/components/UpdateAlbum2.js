@@ -25,6 +25,7 @@ const UpdateAlbum = ({album, onUpdate}, props) => {
     }
 
     return (
+        <>
         <form className='add-form' onSubmit={onSubmit}>
             <div className='form-control'>
                 <label>Álbum</label>
@@ -38,8 +39,8 @@ const UpdateAlbum = ({album, onUpdate}, props) => {
             </div>
 
             <input type='submit' value='Salvar álbum' className='btn btn-block'/>
-            <Button cor='pink' texto='Voltar' onClick={() => props.history.goBack()}/>
         </form>
+        </>
     )
 }
 
