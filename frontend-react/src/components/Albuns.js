@@ -1,6 +1,6 @@
 import Album from './Album'
 
-const Albuns = ({albuns, onDelete, onUpdate}) => {
+const Albuns = ({albuns, onDelete, onUpdate, obterAlbum}) => {
     return (
         <>
             {albuns.map((album) => (
@@ -9,6 +9,7 @@ const Albuns = ({albuns, onDelete, onUpdate}) => {
                     album={album}
                     onDelete={onDelete}
                     onUpdate={onUpdate}
+                    obterAlbum={obterAlbum}
                 />
             ))}
         </>

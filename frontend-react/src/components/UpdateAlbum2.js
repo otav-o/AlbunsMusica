@@ -3,7 +3,7 @@ import Button from './Button';
 import Musica from './Musica';
 import AddMusica from './AddMusica';
 
-const UpdateAlbum = ({album, onUpdate}, props) => {
+const UpdateAlbum = ({album, onUpdate}) => {
 
     const[nome, setNome] = useState(album.nome)
     const[anoLancamento, setAnoLancamento] = useState(album.anoLancamento)
@@ -12,32 +12,27 @@ const UpdateAlbum = ({album, onUpdate}, props) => {
 
     const[mostrarAddMusica, setMostrarAddMusica] = useState(false)
 
-    console.log(album);
-    console.log(musicas);
-
-    const onSubmit = (e) => {
-        // e.preventDefault()
+    const onSubmit = () => {
 
         if (!nome) {
             alert('Campo vazio!')
             return
         }
-
-        onUpdate({albumId, nome, anoLancamento, musicas})
+        console.log('musicas: ', musicas)
+        onUpdate({albumId, nome, anoLancamento, musicas}) 
+        // [asp.net + EF] infelizmente não está dando o put dos detalhes (músicas). Mas atualiza o nome e o ano do álbum normalmente.
+        // Acredito que seja necessário dar um novo get por id do backend (já que o álbum recebido por parâmetro pode ter sido alterado)
+        // Funcionou no JSON Server
     }
 
     const deleteMusica = (id) => {
         setMusicas(musicas.filter((musica) => musica.musicaId !== id))
     }
 
-    // const addMusica = ({nome, duracao}) => {
-    //     setMusicas(...musicas, {nome: nome, duracao: duracao})
-    //     console.log(musicas)
-    // }
 
     const addMusica = (musica) => {
         console.log(musicas)
-        setMusicas([...musicas, musica], { musicaId: (Math.floor(Math.random() * 10000) + 1).toString() }) // !
+        setMusicas([...musicas, musica]) // !
     }
 
     return (
@@ -78,7 +73,7 @@ const UpdateAlbum = ({album, onUpdate}, props) => {
             
             {/* <input type='submit' value='Salvar álbum' className='btn btn-block'/> */}
         
-            <Button texto='Salvar álbum' className='btn btn-block' onClick={() => onSubmit()}/>
+            <Button texto='Salvar álbum' className='btn btn-block' onClick={onSubmit}/>
         </>
     )
 }

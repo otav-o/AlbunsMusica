@@ -13,8 +13,6 @@ const AddMusica = ({addMusica}) => {
             alert('Campo vazio!')
             return
         }
-        
-        setMusica({...musica, musicaId: (Math.floor(Math.random() * 10000) + 1).toString()})
 
         console.log(musica)
         addMusica(musica)

@@ -1,13 +1,38 @@
 import Button from './Button'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ReadAlbum from './ReadAlbum'
-import { Link } from 'react-router-dom'
 import UpdateAlbum from './UpdateAlbum2'
 
-const Album = ({album, onDelete, onUpdate}) => {
+const Album = ({album, onDelete, onUpdate, obterAlbum}) => {
 
     const [mostrarAlbum, setMostrarAlbum] = useState(false)
     const [mostrarAlterarAlbum, setmostrarAlterarAlbum] = useState(false)
+    const [albumCompleto, setAlbumCompleto] = useState({})
+
+ 
+    // useEffect() é semelhante a componentDidMount() e foi necessário para evitar requisições infinitas à api (loop)
+
+    useEffect(() => {
+        const getAlbum = async (id) => {
+            const albumRecuperado = await obterAlbum(id)
+            setAlbumCompleto(albumRecuperado)
+        }
+    
+        getAlbum(album.albumId)
+      }, []) // [album]
+    
+
+    // const baseUrl = 'https://localhost:44305/api/albums' // asp.net
+    // fetch(`${baseUrl}/${album.albumId}`).then(
+    //     (data) => data.json()
+    //   ).then((data) => {
+    //     setAlbumCompleto(data)        
+    //   }) 
+    // // também está em loop!!
+    
+    // console.log(albumCompleto.albumId)
+
+    console.log(album)
 
     return (
         <div className='album'>
@@ -20,7 +45,6 @@ const Album = ({album, onDelete, onUpdate}) => {
                     texto='Ver'
                     onClick={() => setMostrarAlbum(!mostrarAlbum)}
                 />
-                {/* <Link to={`/album/editar/${album.albumId}`}> */}
                 <Button
                     cor='orange'
                     texto='Alterar'
@@ -34,15 +58,15 @@ const Album = ({album, onDelete, onUpdate}) => {
                     onClick={() => onDelete(album.albumId)}
                 />
                 {
-                    mostrarAlbum ?  
+                    mostrarAlbum ? 
                         <ReadAlbum 
-                            album={album}
+                            album={albumCompleto}
                         /> : ''
                 }
 
                 { mostrarAlterarAlbum ? 
                     <UpdateAlbum
-                        album={album}
+                        album={albumCompleto}
                         onUpdate={onUpdate}
                     /> : ''}
         </div>

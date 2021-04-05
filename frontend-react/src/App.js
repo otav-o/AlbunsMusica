@@ -12,8 +12,8 @@ function App() {
 
   const [mostrarAddAlbum, setMostrarAddAlbum] = useState(false)
 
-  const baseUrl = 'http://localhost:3000/albuns'
-  // const baseUrl = 'https://localhost:44305/api/albums' // asp.net
+  // const baseUrl = 'http://localhost:3000/albuns'
+  const baseUrl = 'https://localhost:44305/api/albums' // asp.net
 
   
   useEffect(() => {
@@ -36,13 +36,20 @@ function App() {
 
   console.log(albuns)
 
-  // // GET : Id
-  // const obterAlbum = async (id) => {
-  //   const res = await fetch(`${baseUrl}/${id}`)
-  //   const data = await res.json()
+  // GET : Id
+  const obterAlbum = async (id) => {
+    const res = await fetch(`${baseUrl}/${id}`)
+    const data = await res.json()
 
-  //   return data
+    return data
+  }
+
+  // const getAlbum = async (id) => {
+  //   const albumDoServidor = await obterAlbum()
+  //   setAlbum(albumDoServidor)
   // }
+   
+
 
   // POST
   const addAlbum = async (album) => {
@@ -64,8 +71,6 @@ function App() {
 
     console.log(id)
     await fetch(`${baseUrl}/${id}`, {method: 'DELETE'})
-    // Estava retornando vazio, pois o json não reconhece "albumId" como id
-    // Solução: npx json-server db.json --id albumId 
 
     setAlbuns(albuns.filter((album) => album.albumId !== id)) // não mostrar na UI 
   }
@@ -87,17 +92,7 @@ function App() {
 
     setAlbuns(albuns.map((album) => 
       album.albumId === albumAtualizado.albumId ? {nome: novoNome, anoLancamento: novoAno, musicas: novasMusicas} : album
-      // perfeito
   ))
-
-    // const data = await res.json()
-    
-    //   setAlbuns(albuns.map((album) => 
-    //     album.id === albumAtualizado.id ? {...albuns, album} : album // cuidado
-    // ))
-    // setAlbuns(albuns.map((album) => 
-    //   album.id === albumAtualizado.id ? {...album, musicas: data.musica} : album // cuidado
-    // ))
   }
 
   return (
@@ -109,7 +104,7 @@ function App() {
         />
 
     </div>
-    <Route path='/' exact render={(props) => (
+    <Route path='/' exact render={() => (
       <>
         {mostrarAddAlbum ? 
           (<AddAlbum
@@ -118,9 +113,10 @@ function App() {
 
       {albuns.length > 0 ? (
         <Albuns 
-          albuns={albuns} 
+          albuns={albuns}
           onDelete={deleteAlbum}
           onUpdate={atualizarAlbum}
+          obterAlbum={obterAlbum}
         />
       ) : ('Não há álbuns por aqui.')}
       </>
